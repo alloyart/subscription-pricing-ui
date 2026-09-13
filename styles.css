@@ -55,7 +55,7 @@ button { border: 0; }
   justify-content: space-between;
   padding: 24px 16px;
   background: var(--canvas);
-  border-right: 1px solid var(--divider);
+  border-right: 0;
   z-index: 2;
 }
 .sidebar-top { display: flex; flex-direction: column; gap: 32px; }
@@ -73,11 +73,11 @@ button { border: 0; }
 .nav-list { display: flex; flex-direction: column; gap: 4px; }
 .nav-item {
   min-height: 44px;
-  padding: 0 12px;
+  padding: 0 16px;
   border-radius: var(--radius-control);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   color: var(--body);
   font-size: 14px;
   line-height: 16.8px;
@@ -94,8 +94,8 @@ button { border: 0; }
   stroke-linejoin: round;
   flex: 0 0 auto;
 }
-.nav-item:hover { background: #f7f7f7; color: var(--ink); }
-.nav-item--new { margin-bottom: 12px; }
+.nav-item:hover { background: var(--surface); color: var(--ink); }
+.nav-item--new { margin-bottom: 16px; }
 .nav-item--active { background: var(--surface); color: var(--ink); }
 .nav-item:focus-visible,
 .product-mark:focus-visible,
@@ -108,7 +108,7 @@ button { border: 0; }
   min-height: 56px;
   display: grid;
   grid-template-columns: 36px minmax(0,1fr) 20px;
-  gap: 12px;
+  gap: 16px;
   align-items: center;
   padding: 8px;
   border-radius: var(--radius-control);
@@ -132,14 +132,14 @@ button { border: 0; }
 
 .main-content {
   min-width: 0;
-  padding: 40px var(--page-gutter) 72px;
+  padding: 48px var(--page-gutter) 80px;
 }
 .page-intro,
 .pricing-section {
   width: min(1752px, 100%);
   margin: 0 auto;
 }
-.page-intro { padding-bottom: 40px; }
+.page-intro { padding-bottom: 48px; }
 .page-heading-row {
   min-height: 48px;
   display: flex;
@@ -203,8 +203,8 @@ h1 {
   align-items: stretch;
 }
 .plan-card {
-  min-height: 980px;
-  padding: 40px 32px 48px;
+  min-height: 992px;
+  padding: 40px 40px 48px;
   display: flex;
   flex-direction: column;
   background: var(--surface);
@@ -270,14 +270,14 @@ h1 {
 .plan-action--primary:hover { background: var(--action-hover); }
 .plan-action--primary:active { background: var(--action-pressed); }
 .plan-action--secondary { background: var(--canvas); color: var(--body); cursor: pointer; }
-.plan-action--secondary:hover { background: #fafafa; color: var(--ink); }
-.plan-action--secondary:active { background: var(--divider); }
+.plan-action--secondary:hover { background: var(--divider); color: var(--ink); }
+.plan-action--secondary:active { background: var(--control-border); }
 
 .plan-section-divider {
   width: 100%;
   height: 1px;
   flex: 0 0 1px;
-  margin: 40px 0 32px;
+  margin: 48px 0 32px;
   background: var(--control-border);
 }
 .credit-summary {
@@ -292,7 +292,7 @@ h1 {
 .credit-summary-copy {
   display: grid;
   grid-template-columns: 20px minmax(0, 1fr);
-  gap: 12px;
+  gap: 16px;
   align-items: center;
   color: var(--ink);
   font-size: 14px;
@@ -342,7 +342,7 @@ h1 {
 .benefit-list li {
   display: grid;
   grid-template-columns: 20px minmax(0, 1fr);
-  gap: 12px;
+  gap: 16px;
   align-items: start;
   color: var(--body);
   font-size: 14px;
@@ -354,19 +354,19 @@ h1 {
   .billing-selector { flex-basis: 448px; }
   .plan-card { min-height: 1040px; padding: 40px 40px 48px; }
   .price-row { margin-top: 48px; }
-  .plan-section-divider { margin: 48px 0 32px; }
+  .plan-section-divider { margin: 56px 0 32px; }
   .credit-summary { min-height: 120px; padding: 24px; }
 }
 
 @media (max-width: 1599px) {
   :root { --page-gutter: 32px; --card-gap: 16px; }
-  .main-content { padding-top: 32px; padding-bottom: 64px; }
+  .main-content { padding-top: 40px; padding-bottom: 64px; }
   .page-heading-row { gap: 32px; }
   .billing-selector { flex-basis: 416px; }
-  .page-intro { padding-bottom: 32px; }
+  .page-intro { padding-bottom: 40px; }
   .plan-card { min-height: 920px; padding: 32px 32px 40px; }
   .price-row { margin-top: 40px; }
-  .plan-section-divider { margin: 40px 0 32px; }
+  .plan-section-divider { margin: 48px 0 32px; }
   .credit-summary { min-height: 108px; padding: 16px; }
 }
 
