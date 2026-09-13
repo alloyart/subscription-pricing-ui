@@ -30,6 +30,7 @@ body {
   font-family: var(--font-text);
   font-size: 14px;
   line-height: 20px;
+  letter-spacing: normal;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -78,6 +79,8 @@ button { border: 0; }
   align-items: center;
   gap: 12px;
   color: var(--body);
+  font-size: 14px;
+  line-height: 16.8px;
   font-weight: 500;
   transition: background-color 330ms var(--ease), color 330ms var(--ease);
 }
@@ -119,23 +122,24 @@ button { border: 0; }
   background: var(--surface);
   color: var(--ink);
   font-size: 12px;
+  line-height: 16px;
   font-weight: 500;
 }
 .account-copy { min-width: 0; }
 .account-name { color: var(--ink); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .account-plan { color: var(--tertiary); margin-top: 2px; }
-.account-chevron { width: 18px; height: 18px; fill: none; stroke: var(--tertiary); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.account-chevron { width: 18px; height: 18px; fill: none; stroke: var(--tertiary); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
 .main-content {
   min-width: 0;
-  padding: 40px var(--page-gutter) 64px;
+  padding: 40px var(--page-gutter) 72px;
 }
 .page-intro,
 .pricing-section {
   width: min(1752px, 100%);
   margin: 0 auto;
 }
-.page-intro { padding-bottom: 32px; }
+.page-intro { padding-bottom: 40px; }
 .page-heading-row {
   min-height: 48px;
   display: flex;
@@ -160,28 +164,29 @@ h1 {
   color: var(--body);
   font-size: 14px;
   line-height: 20px;
+  font-weight: 400;
 }
 .page-support { margin-top: 8px; color: var(--tertiary); }
 
 .billing-selector {
   flex: 0 0 432px;
   height: 40px;
-  padding: 2px;
+  padding: 4px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2px;
+  gap: 4px;
   background: var(--surface);
   border-radius: var(--radius-control);
 }
 .billing-option {
   min-width: 0;
-  height: 36px;
+  height: 32px;
   padding: 0 16px;
   border-radius: var(--radius-control);
   background: transparent;
   color: var(--tertiary);
   font-size: 14px;
-  line-height: 20px;
+  line-height: 16.8px;
   font-weight: 500;
   white-space: nowrap;
   cursor: default;
@@ -208,7 +213,7 @@ h1 {
 }
 .plan-card--pro { border-color: var(--action); }
 .plan-topline {
-  min-height: 24px;
+  min-height: 20px;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -217,13 +222,13 @@ h1 {
 .plan-topline h2 {
   margin-bottom: 0;
   font-size: 17px;
-  line-height: 24px;
+  line-height: 20px;
   font-weight: 500;
   letter-spacing: normal;
 }
 .recommended { color: var(--body); font-size: 14px; line-height: 20px; font-weight: 500; white-space: nowrap; }
 .price-row {
-  margin-top: 48px;
+  margin-top: 40px;
   min-height: 48px;
   display: flex;
   align-items: baseline;
@@ -236,26 +241,27 @@ h1 {
   font-weight: 500;
   letter-spacing: normal;
 }
-.price-unit { color: var(--tertiary); font-size: 14px; line-height: 20px; }
+.price-unit { color: var(--tertiary); font-size: 14px; line-height: 20px; font-weight: 400; }
 .plan-positioning {
   min-height: 40px;
   max-width: 390px;
-  margin: 24px 0 0;
+  margin: 16px 0 0;
   color: var(--body);
   font-size: 14px;
   line-height: 20px;
+  font-weight: 400;
 }
 .plan-action {
   width: 100%;
-  min-height: 48px;
+  min-height: 44px;
   margin-top: 24px;
-  padding: 0 16px;
+  padding: 4px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-control);
   font-size: 14px;
-  line-height: 20px;
+  line-height: 16.8px;
   font-weight: 500;
   transition: background-color 330ms var(--ease), color 330ms var(--ease), border-color 330ms var(--ease);
 }
@@ -277,7 +283,7 @@ h1 {
 .credit-summary {
   min-height: 112px;
   margin-top: 0;
-  padding: 20px 20px 18px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   background: var(--canvas);
@@ -300,7 +306,7 @@ h1 {
   color: var(--ink);
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.55;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
   flex: 0 0 auto;
@@ -339,34 +345,29 @@ h1 {
   gap: 12px;
   align-items: start;
   color: var(--body);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
 }
 
 @media (min-width: 1760px) {
   .billing-selector { flex-basis: 448px; }
   .plan-card { min-height: 1040px; padding: 40px 40px 48px; }
-  .price-row { margin-top: 56px; }
-  .plan-positioning { margin-top: 24px; }
-  .plan-action { margin-top: 24px; }
+  .price-row { margin-top: 48px; }
   .plan-section-divider { margin: 48px 0 32px; }
-  .credit-summary { min-height: 120px; padding: 24px 24px 20px; }
-  .benefit-block { margin-top: 16px; }
-  .benefit-list { gap: 16px; }
+  .credit-summary { min-height: 120px; padding: 24px; }
 }
 
 @media (max-width: 1599px) {
   :root { --page-gutter: 32px; --card-gap: 16px; }
-  .main-content { padding-top: 32px; }
+  .main-content { padding-top: 32px; padding-bottom: 64px; }
   .page-heading-row { gap: 32px; }
   .billing-selector { flex-basis: 416px; }
   .page-intro { padding-bottom: 32px; }
   .plan-card { min-height: 920px; padding: 32px 32px 40px; }
   .price-row { margin-top: 40px; }
-  .plan-positioning { margin-top: 24px; }
-  .plan-action { margin-top: 24px; }
   .plan-section-divider { margin: 40px 0 32px; }
   .credit-summary { min-height: 108px; padding: 16px; }
-  .benefit-block { margin-top: 16px; }
-  .benefit-list { gap: 16px; }
 }
 
 @media (max-width: 1350px) {
@@ -376,12 +377,9 @@ h1 {
   .billing-option { padding: 0 8px; }
   .plan-card { min-height: 880px; padding: 32px 24px 40px; }
   .price-row { margin-top: 40px; }
-  .plan-positioning { margin-top: 24px; }
-  .plan-action { margin-top: 24px; min-height: 48px; }
+  .plan-action { min-height: 44px; }
   .plan-section-divider { margin: 40px 0 32px; }
   .credit-summary { min-height: 104px; padding: 16px; }
-  .benefit-block { margin-top: 16px; }
-  .benefit-list { gap: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
