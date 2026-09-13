@@ -96,7 +96,8 @@ button { border: 0; }
 .nav-item--active { background: var(--surface); color: var(--ink); }
 .nav-item:focus-visible,
 .product-mark:focus-visible,
-.plan-action:focus-visible {
+.plan-action:focus-visible,
+.billing-option:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
@@ -127,17 +128,17 @@ button { border: 0; }
 
 .main-content {
   min-width: 0;
-  padding: 36px var(--page-gutter) 48px;
+  padding: 40px var(--page-gutter) 64px;
 }
 .page-intro,
 .pricing-section {
   width: min(1752px, 100%);
   margin: 0 auto;
 }
-.page-intro { padding-bottom: 26px; }
+.page-intro { padding-bottom: 28px; }
 h1, h2, h3, p { margin-top: 0; }
 h1 {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   font-family: var(--font-display);
   font-size: 40px;
   line-height: 48px;
@@ -152,7 +153,46 @@ h1 {
   font-size: 14px;
   line-height: 20px;
 }
-.page-support { margin-top: 2px; color: var(--tertiary); }
+.page-support { margin-top: 4px; color: var(--tertiary); }
+
+.pricing-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+.billing-selector {
+  width: min(620px, 45vw);
+  min-width: 470px;
+  height: 48px;
+  padding: 4px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+  background: var(--surface);
+  border-radius: 12px;
+}
+.billing-option {
+  min-width: 0;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--tertiary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: default;
+}
+.billing-option span {
+  margin-left: 6px;
+  color: inherit;
+  font-weight: 400;
+}
+.billing-option--active {
+  background: var(--canvas);
+  color: var(--ink);
+}
 
 .plan-grid {
   display: grid;
@@ -161,7 +201,8 @@ h1 {
   align-items: stretch;
 }
 .plan-card {
-  padding: 30px 32px 34px;
+  min-height: 920px;
+  padding: 38px 36px 46px;
   display: flex;
   flex-direction: column;
   background: var(--surface);
@@ -189,7 +230,7 @@ h1 {
   white-space: nowrap;
 }
 .price-row {
-  margin-top: 38px;
+  margin-top: 52px;
   min-height: 48px;
   display: flex;
   align-items: baseline;
@@ -206,15 +247,15 @@ h1 {
 .plan-positioning {
   min-height: 40px;
   max-width: 390px;
-  margin: 22px 0 0;
+  margin: 30px 0 0;
   color: var(--body);
   font-size: 14px;
   line-height: 20px;
 }
 .plan-action {
   width: 100%;
-  min-height: 48px;
-  margin-top: 20px;
+  min-height: 52px;
+  margin-top: 28px;
   padding: 0 20px;
   display: flex;
   align-items: center;
@@ -245,12 +286,12 @@ h1 {
 .plan-action--secondary:hover { background: #fafafa; color: var(--ink); }
 .plan-action--secondary:active { background: #eeeeee; }
 .benefit-block {
-  margin-top: 30px;
-  padding-top: 28px;
+  margin-top: 38px;
+  padding-top: 32px;
   border-top: 1px solid var(--divider);
 }
 .benefit-block h3 {
-  margin-bottom: 18px;
+  margin-bottom: 22px;
   color: var(--ink);
   font-size: 14px;
   line-height: 20px;
@@ -262,7 +303,7 @@ h1 {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 18px;
 }
 .benefit-list li {
   display: grid;
@@ -271,8 +312,7 @@ h1 {
   align-items: start;
   color: var(--body);
 }
-.benefit-icon,
-.term-icon {
+.benefit-icon {
   width: 20px;
   height: 20px;
   color: var(--ink);
@@ -283,54 +323,40 @@ h1 {
   stroke-linejoin: round;
   flex: 0 0 auto;
 }
-.credits-help {
-  margin: 20px 0 0;
-  color: var(--tertiary);
-  font-size: 14px;
-  line-height: 20px;
-}
-.terms {
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid var(--divider);
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-}
-.terms p {
-  margin-bottom: 0;
-  display: grid;
-  grid-template-columns: 20px minmax(0,1fr);
-  gap: 12px;
-  align-items: start;
-  color: var(--body);
-}
 
 @media (min-width: 1760px) {
-  .plan-card { padding: 34px 36px 38px; }
-  .price-row { margin-top: 42px; }
-  .plan-positioning { margin-top: 24px; }
-  .benefit-block { margin-top: 32px; }
-  .benefit-list { gap: 16px; }
+  .plan-card { min-height: 980px; padding: 42px 40px 50px; }
+  .price-row { margin-top: 58px; }
+  .plan-positioning { margin-top: 34px; }
+  .plan-action { margin-top: 30px; }
+  .benefit-block { margin-top: 42px; padding-top: 34px; }
+  .benefit-list { gap: 20px; }
 }
 
 @media (max-width: 1599px) {
   :root { --page-gutter: 32px; --card-gap: 20px; }
-  .main-content { padding-top: 32px; }
+  .main-content { padding-top: 34px; }
   .page-intro { padding-bottom: 24px; }
-  .plan-card { padding: 28px 28px 32px; }
-  .price-row { margin-top: 34px; }
+  .billing-selector { width: 520px; min-width: 440px; }
+  .plan-card { min-height: 860px; padding: 34px 30px 40px; }
+  .price-row { margin-top: 46px; }
+  .plan-positioning { margin-top: 26px; }
+  .plan-action { margin-top: 24px; }
+  .benefit-block { margin-top: 34px; padding-top: 28px; }
+  .benefit-list { gap: 16px; }
 }
 
 @media (max-width: 1350px) {
   :root { --page-gutter: 28px; --card-gap: 16px; }
-  .plan-card { padding: 26px 24px 30px; }
-  .price-row { margin-top: 30px; }
-  .plan-positioning { margin-top: 18px; }
-  .plan-action { margin-top: 18px; min-height: 46px; }
-  .benefit-block { margin-top: 26px; padding-top: 24px; }
-  .benefit-list { gap: 13px; }
-  .terms { gap: 20px; }
+  .pricing-toolbar { margin-bottom: 20px; }
+  .billing-selector { width: 480px; min-width: 420px; }
+  .billing-option { padding: 0 12px; }
+  .plan-card { min-height: 820px; padding: 30px 24px 36px; }
+  .price-row { margin-top: 40px; }
+  .plan-positioning { margin-top: 24px; }
+  .plan-action { margin-top: 22px; min-height: 48px; }
+  .benefit-block { margin-top: 30px; padding-top: 26px; }
+  .benefit-list { gap: 15px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
