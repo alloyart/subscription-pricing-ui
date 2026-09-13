@@ -6,6 +6,7 @@
   <title>Plans & pricing</title>
   <meta name="description" content="Subscription plan comparison" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true" focusable="false">
@@ -27,9 +28,15 @@
     <symbol id="icon-priority" viewBox="0 0 24 24">
       <path d="M5 17 10 12l3 3 6-7"/><path d="M15 8h4v4"/>
     </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24">
+      <path d="m6.5 12.5 3.5 3.5 7.5-8"/>
+    </symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24">
+      <path d="M7 7l10 10M17 7 7 17"/>
+    </symbol>
   </svg>
 
-  <div class="app-shell">
+  <div class="app-shell" id="app-shell" data-current-plan="free">
     <aside class="sidebar" aria-label="Product navigation">
       <div class="sidebar-top">
         <a class="product-mark" href="#" aria-label="Product home">
@@ -63,7 +70,7 @@
         <div class="avatar" aria-hidden="true">AM</div>
         <div class="account-copy">
           <div class="account-name">Alex Morgan</div>
-          <div class="account-plan">Free</div>
+          <div class="account-plan" id="sidebar-plan">Free</div>
         </div>
         <svg class="account-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 10 3 3 3-3"/></svg>
       </div>
@@ -74,9 +81,9 @@
         <div class="page-heading-row">
           <h1 id="page-title">Plans &amp; pricing</h1>
           <div class="billing-selector" role="tablist" aria-label="Billing period">
-            <button class="billing-option" type="button" role="tab" aria-selected="false">Yearly <span>50% off</span></button>
-            <button class="billing-option billing-option--active" type="button" role="tab" aria-selected="true">Monthly <span>40% off</span></button>
-            <button class="billing-option" type="button" role="tab" aria-selected="false">1-month</button>
+            <button class="billing-option" type="button" role="tab" aria-selected="false" aria-disabled="true" disabled>Yearly <span>50% off</span></button>
+            <button class="billing-option billing-option--active" type="button" role="tab" aria-selected="true" tabindex="0">Monthly <span>40% off</span></button>
+            <button class="billing-option" type="button" role="tab" aria-selected="false" aria-disabled="true" disabled>1-month</button>
           </div>
         </div>
         <p class="page-lead">Choose the plan that fits how you work. All plans include AI chat, document generation, and Slides.</p>
@@ -85,7 +92,7 @@
 
       <section class="pricing-section" aria-label="Plan comparison">
         <div class="plan-grid">
-          <article class="plan-card" aria-labelledby="free-title">
+          <article class="plan-card is-current" id="free-card" aria-labelledby="free-title" aria-current="true">
             <div class="plan-topline">
               <h2 id="free-title">Free</h2>
             </div>
@@ -94,7 +101,7 @@
               <span class="price-unit">/ month</span>
             </div>
             <p class="plan-positioning">Essential AI tools for getting started.</p>
-            <div class="plan-action plan-action--current" aria-label="Your current plan">Your current plan</div>
+            <div class="plan-action plan-action--current" id="free-current" aria-label="Your current plan">Your current plan</div>
 
             <div class="credit-summary" aria-label="1,000 credits every month">
               <div class="credit-summary-copy">
@@ -114,9 +121,9 @@
             </div>
           </article>
 
-          <article class="plan-card plan-card--pro" aria-labelledby="pro-title">
+          <article class="plan-card plan-card--pro" id="pro-card" aria-labelledby="pro-title">
             <div class="plan-topline">
-              <h2 id="pro-title">Pro</h2>
+              <h2 id="pro-title" tabindex="-1">Pro</h2>
               <span class="recommended">Recommended</span>
             </div>
             <div class="price-row" aria-label="$12 per month">
@@ -124,7 +131,8 @@
               <span class="price-unit">/ month</span>
             </div>
             <p class="plan-positioning">More capacity and advanced models for regular work.</p>
-            <button class="plan-action plan-action--primary" type="button">Upgrade to Pro</button>
+            <button class="plan-action plan-action--primary" id="pro-cta" type="button">Upgrade to Pro</button>
+            <div class="plan-action plan-action--current" id="pro-current" aria-label="Your current plan" hidden>Your current plan</div>
 
             <div class="credit-summary" aria-label="20,000 credits every month">
               <div class="credit-summary-copy">
@@ -147,7 +155,7 @@
             </div>
           </article>
 
-          <article class="plan-card" aria-labelledby="ultra-title">
+          <article class="plan-card" id="ultra-card" aria-labelledby="ultra-title">
             <div class="plan-topline">
               <h2 id="ultra-title">Ultra</h2>
             </div>
@@ -180,8 +188,46 @@
             </div>
           </article>
         </div>
+
+        <div class="pricing-footnotes">
+          <p class="credits-helper">Credits are used across AI chat, document generation, and Slides.</p>
+          <section class="subscription-terms" aria-label="Subscription terms">
+            <p>Paid plans renew automatically every month.</p>
+            <p>Cancel anytime.</p>
+            <p>New benefits are available as soon as your subscription is confirmed.</p>
+          </section>
+        </div>
       </section>
     </main>
+
+    <div class="sr-only" id="plan-status" role="status" aria-live="polite"></div>
+  </div>
+
+  <div class="modal-layer" id="success-layer" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-copy">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Close Pro confirmation">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-close"/></svg>
+      </button>
+
+      <div class="success-symbol" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><use href="#icon-check"/></svg>
+      </div>
+      <h2 id="modal-title" tabindex="-1">Welcome to Pro</h2>
+      <p class="modal-copy" id="modal-copy">Your plan is now active. You can use your Pro benefits immediately.</p>
+
+      <div class="modal-benefit-group">
+        <h3>Included with Pro</h3>
+        <ul class="modal-benefit-list">
+          <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-credits"/></svg><span>20,000 credits every month</span></li>
+          <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-model"/></svg><span>Access to advanced models</span></li>
+          <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-chat"/></svg><span>AI chat, document generation, and Slides</span></li>
+        </ul>
+      </div>
+
+      <div class="modal-actions">
+        <button class="plan-action plan-action--primary modal-primary" id="start-using" type="button">Start using Pro</button>
+      </div>
+    </section>
   </div>
 </body>
 </html>
