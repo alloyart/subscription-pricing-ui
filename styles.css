@@ -14,7 +14,7 @@
   --font-text: "Universal Sans Text", Arial, Helvetica, sans-serif;
   --sidebar-width: 216px;
   --page-gutter: 40px;
-  --card-gap: 32px;
+  --card-gap: 24px;
   --radius-card: 12px;
   --radius-control: 4px;
   --ease: cubic-bezier(0.5, 0, 0, 0.75);
@@ -36,6 +36,7 @@ body {
 button, a { font: inherit; }
 a { color: inherit; text-decoration: none; }
 button { border: 0; }
+.icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 
 .app-shell {
   min-height: 100vh;
@@ -126,17 +127,17 @@ button { border: 0; }
 
 .main-content {
   min-width: 0;
-  padding: 42px var(--page-gutter) 56px;
+  padding: 36px var(--page-gutter) 48px;
 }
 .page-intro,
 .pricing-section {
   width: min(1752px, 100%);
   margin: 0 auto;
 }
-.page-intro { padding-bottom: 34px; }
+.page-intro { padding-bottom: 26px; }
 h1, h2, h3, p { margin-top: 0; }
 h1 {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   font-family: var(--font-display);
   font-size: 40px;
   line-height: 48px;
@@ -151,7 +152,7 @@ h1 {
   font-size: 14px;
   line-height: 20px;
 }
-.page-support { margin-top: 4px; color: var(--tertiary); }
+.page-support { margin-top: 2px; color: var(--tertiary); }
 
 .plan-grid {
   display: grid;
@@ -160,8 +161,7 @@ h1 {
   align-items: stretch;
 }
 .plan-card {
-  min-height: clamp(794px, 62vw, 1060px);
-  padding: 38px 40px 40px;
+  padding: 30px 32px 34px;
   display: flex;
   flex-direction: column;
   background: var(--surface);
@@ -189,11 +189,11 @@ h1 {
   white-space: nowrap;
 }
 .price-row {
-  margin-top: clamp(64px, 5.5vw, 112px);
+  margin-top: 38px;
   min-height: 48px;
   display: flex;
   align-items: baseline;
-  gap: 10px;
+  gap: 8px;
 }
 .price-value {
   font-family: var(--font-display);
@@ -206,15 +206,15 @@ h1 {
 .plan-positioning {
   min-height: 40px;
   max-width: 390px;
-  margin: clamp(52px, 4.3vw, 88px) 0 0;
+  margin: 22px 0 0;
   color: var(--body);
   font-size: 14px;
   line-height: 20px;
 }
 .plan-action {
   width: 100%;
-  min-height: 52px;
-  margin-top: 34px;
+  min-height: 48px;
+  margin-top: 20px;
   padding: 0 20px;
   display: flex;
   align-items: center;
@@ -245,10 +245,12 @@ h1 {
 .plan-action--secondary:hover { background: #fafafa; color: var(--ink); }
 .plan-action--secondary:active { background: #eeeeee; }
 .benefit-block {
-  margin-top: clamp(52px, 4.4vw, 88px);
+  margin-top: 30px;
+  padding-top: 28px;
+  border-top: 1px solid var(--divider);
 }
 .benefit-block h3 {
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   color: var(--ink);
   font-size: 14px;
   line-height: 20px;
@@ -260,7 +262,7 @@ h1 {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 15px;
 }
 .benefit-list li {
   display: grid;
@@ -269,28 +271,31 @@ h1 {
   align-items: start;
   color: var(--body);
 }
-.benefit-icon {
+.benefit-icon,
+.term-icon {
   width: 20px;
   height: 20px;
-  display: grid;
-  place-items: center;
   color: var(--ink);
-  font-size: 14px;
-  line-height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: 0 0 auto;
 }
 .credits-help {
-  margin: 24px 0 0;
+  margin: 20px 0 0;
   color: var(--tertiary);
   font-size: 14px;
   line-height: 20px;
 }
 .terms {
-  margin-top: 40px;
-  padding-top: 30px;
+  margin-top: 28px;
+  padding-top: 24px;
   border-top: 1px solid var(--divider);
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px;
+  gap: 24px;
 }
 .terms p {
   margin-bottom: 0;
@@ -300,21 +305,32 @@ h1 {
   align-items: start;
   color: var(--body);
 }
-.term-icon { width: 20px; height: 20px; display: grid; place-items: center; color: var(--ink); }
+
+@media (min-width: 1760px) {
+  .plan-card { padding: 34px 36px 38px; }
+  .price-row { margin-top: 42px; }
+  .plan-positioning { margin-top: 24px; }
+  .benefit-block { margin-top: 32px; }
+  .benefit-list { gap: 16px; }
+}
 
 @media (max-width: 1599px) {
-  :root { --page-gutter: 32px; --card-gap: 24px; }
-  .main-content { padding-top: 36px; }
-  .plan-card { padding-left: 32px; padding-right: 32px; }
+  :root { --page-gutter: 32px; --card-gap: 20px; }
+  .main-content { padding-top: 32px; }
+  .page-intro { padding-bottom: 24px; }
+  .plan-card { padding: 28px 28px 32px; }
+  .price-row { margin-top: 34px; }
 }
 
 @media (max-width: 1350px) {
-  :root { --page-gutter: 28px; --card-gap: 20px; }
-  .plan-card { padding: 32px 28px 36px; }
-  .price-row { margin-top: 56px; }
-  .plan-positioning { margin-top: 48px; }
-  .benefit-block { margin-top: 48px; }
-  .terms { gap: 24px; }
+  :root { --page-gutter: 28px; --card-gap: 16px; }
+  .plan-card { padding: 26px 24px 30px; }
+  .price-row { margin-top: 30px; }
+  .plan-positioning { margin-top: 18px; }
+  .plan-action { margin-top: 18px; min-height: 46px; }
+  .benefit-block { margin-top: 26px; padding-top: 24px; }
+  .benefit-list { gap: 13px; }
+  .terms { gap: 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
