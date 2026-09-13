@@ -52,7 +52,7 @@ button { border: 0; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 24px 16px 24px;
+  padding: 24px 16px;
   background: var(--canvas);
   border-right: 1px solid var(--divider);
   z-index: 2;
@@ -187,19 +187,9 @@ h1 {
   cursor: default;
   transition: background-color 330ms var(--ease), color 330ms var(--ease);
 }
-.billing-option span {
-  margin-left: 4px;
-  color: inherit;
-  font-weight: 400;
-}
-.billing-option--active {
-  background: var(--canvas);
-  color: var(--ink);
-}
-.billing-option:not(.billing-option--active):hover {
-  background: var(--divider);
-  color: var(--body);
-}
+.billing-option span { margin-left: 4px; color: inherit; font-weight: 400; }
+.billing-option--active { background: var(--canvas); color: var(--ink); }
+.billing-option:not(.billing-option--active):hover { background: var(--divider); color: var(--body); }
 
 .plan-grid {
   display: grid;
@@ -216,9 +206,7 @@ h1 {
   border: 1px solid transparent;
   border-radius: var(--radius-card);
 }
-.plan-card--pro {
-  border-color: var(--action);
-}
+.plan-card--pro { border-color: var(--action); }
 .plan-topline {
   min-height: 24px;
   display: flex;
@@ -233,13 +221,7 @@ h1 {
   font-weight: 500;
   letter-spacing: normal;
 }
-.recommended {
-  color: var(--body);
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 500;
-  white-space: nowrap;
-}
+.recommended { color: var(--body); font-size: 14px; line-height: 20px; font-weight: 500; white-space: nowrap; }
 .price-row {
   margin-top: 48px;
   min-height: 48px;
@@ -277,43 +259,29 @@ h1 {
   font-weight: 500;
   transition: background-color 330ms var(--ease), color 330ms var(--ease), border-color 330ms var(--ease);
 }
-.plan-action--current {
-  background: var(--canvas);
-  color: var(--ink);
-}
-.plan-action--primary {
-  background: var(--action);
-  color: var(--canvas);
-  cursor: pointer;
-}
+.plan-action--current { background: var(--canvas); color: var(--ink); }
+.plan-action--primary { background: var(--action); color: var(--canvas); cursor: pointer; }
 .plan-action--primary:hover { background: var(--action-hover); }
 .plan-action--primary:active { background: var(--action-pressed); }
-.plan-action--secondary {
-  background: var(--canvas);
-  color: var(--body);
-  cursor: pointer;
-}
+.plan-action--secondary { background: var(--canvas); color: var(--body); cursor: pointer; }
 .plan-action--secondary:hover { background: #fafafa; color: var(--ink); }
 .plan-action--secondary:active { background: var(--divider); }
 
+.plan-section-divider {
+  width: 100%;
+  height: 1px;
+  flex: 0 0 1px;
+  margin: 40px 0 32px;
+  background: var(--control-border);
+}
 .credit-summary {
-  position: relative;
   min-height: 112px;
-  margin-top: 64px;
+  margin-top: 0;
   padding: 20px 20px 18px;
   display: flex;
   flex-direction: column;
   background: var(--canvas);
   border-radius: var(--radius-control);
-}
-.credit-summary::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -32px;
-  height: 1px;
-  background: var(--control-border);
 }
 .credit-summary-copy {
   display: grid;
@@ -345,17 +313,11 @@ h1 {
   background: var(--control-border);
   overflow: hidden;
 }
-.credit-progress-fill {
-  display: block;
-  height: 100%;
-  background: var(--ink);
-}
+.credit-progress-fill { display: block; height: 100%; background: var(--ink); }
 .credit-progress-fill--pro { width: 33.333%; }
 .credit-progress-fill--ultra { width: 100%; }
 
-.benefit-block {
-  margin-top: 16px;
-}
+.benefit-block { margin-top: 16px; }
 .benefit-block h3 {
   margin-bottom: 16px;
   color: var(--ink);
@@ -385,8 +347,8 @@ h1 {
   .price-row { margin-top: 56px; }
   .plan-positioning { margin-top: 24px; }
   .plan-action { margin-top: 24px; }
-  .credit-summary { min-height: 120px; margin-top: 64px; padding: 24px 24px 20px; }
-  .credit-summary::before { left: 0; right: 0; top: -32px; }
+  .plan-section-divider { margin: 48px 0 32px; }
+  .credit-summary { min-height: 120px; padding: 24px 24px 20px; }
   .benefit-block { margin-top: 16px; }
   .benefit-list { gap: 16px; }
 }
@@ -401,8 +363,8 @@ h1 {
   .price-row { margin-top: 40px; }
   .plan-positioning { margin-top: 24px; }
   .plan-action { margin-top: 24px; }
-  .credit-summary { min-height: 108px; margin-top: 64px; padding: 16px; }
-  .credit-summary::before { left: 0; right: 0; top: -32px; }
+  .plan-section-divider { margin: 40px 0 32px; }
+  .credit-summary { min-height: 108px; padding: 16px; }
   .benefit-block { margin-top: 16px; }
   .benefit-list { gap: 16px; }
 }
@@ -416,8 +378,8 @@ h1 {
   .price-row { margin-top: 40px; }
   .plan-positioning { margin-top: 24px; }
   .plan-action { margin-top: 24px; min-height: 48px; }
-  .credit-summary { min-height: 104px; margin-top: 64px; padding: 16px; }
-  .credit-summary::before { left: 0; right: 0; top: -32px; }
+  .plan-section-divider { margin: 40px 0 32px; }
+  .credit-summary { min-height: 104px; padding: 16px; }
   .benefit-block { margin-top: 16px; }
   .benefit-list { gap: 16px; }
 }
