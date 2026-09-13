@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plans & pricing</title>
+  <meta name="description" content="Subscription plan comparison" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Product navigation">
+      <div class="sidebar-top">
+        <a class="product-mark" href="#" aria-label="Product home">
+          <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+        </a>
+        <nav class="nav-list">
+          <a class="nav-item nav-item--new" href="#">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            <span>New task</span>
+          </a>
+          <a class="nav-item" href="#">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7.5a4 4 0 1 1 8 0c0 4.5 3 4.2 3 7.5H5c0-3.3 3-3 3-7.5Z"/><path d="M9.5 18h5"/></svg>
+            <span>Assistant</span>
+          </a>
+          <a class="nav-item" href="#">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h7l3 3v13H7z"/><path d="M14 4v4h4M9.5 12h5M9.5 15h5"/></svg>
+            <span>Docs</span>
+          </a>
+          <a class="nav-item" href="#">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="1"/><path d="M8 9h8M8 12h5M8 15h7"/></svg>
+            <span>Slides</span>
+          </a>
+          <a class="nav-item nav-item--active" href="#" aria-current="page">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h12v12H6z"/><path d="M9 9h6M9 12h6M9 15h3"/></svg>
+            <span>Plans</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="account-card" aria-label="Account">
+        <div class="avatar" aria-hidden="true">AM</div>
+        <div class="account-copy">
+          <div class="account-name">Alex Morgan</div>
+          <div class="account-plan">Free</div>
+        </div>
+        <svg class="account-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 10 3 3 3-3"/></svg>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section class="page-intro" aria-labelledby="page-title">
+        <h1 id="page-title">Plans &amp; pricing</h1>
+        <p class="page-lead">Choose the plan that fits how you work. All plans include AI chat, document generation, and Slides.</p>
+        <p class="page-support">Upgrade for more monthly credits and advanced capabilities.</p>
+      </section>
+
+      <section class="pricing-section" aria-label="Plan comparison">
+        <div class="plan-grid">
+          <article class="plan-card" aria-labelledby="free-title">
+            <div class="plan-topline">
+              <h2 id="free-title">Free</h2>
+            </div>
+            <div class="price-row" aria-label="$0 per month">
+              <span class="price-value">$0</span>
+              <span class="price-unit">/ month</span>
+            </div>
+            <p class="plan-positioning">Essential AI tools for getting started.</p>
+            <div class="plan-action plan-action--current" aria-label="Your current plan">Your current plan</div>
+            <div class="benefit-block">
+              <h3>Includes:</h3>
+              <ul class="benefit-list">
+                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>1,000 credits every month</span></li>
+                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>AI chat for everyday questions and tasks</span></li>
+                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>Create and refine documents</span></li>
+                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>Create presentations with Slides</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="plan-card plan-card--pro" aria-labelledby="pro-title">
+            <div class="plan-topline">
+              <h2 id="pro-title">Pro</h2>
+              <span class="recommended">Recommended</span>
+            </div>
+            <div class="price-row" aria-label="$12 per month">
+              <span class="price-value">$12</span>
+              <span class="price-unit">/ month</span>
+            </div>
+            <p class="plan-positioning">More capacity and advanced models for regular work.</p>
+            <button class="plan-action plan-action--primary" type="button">Upgrade to Pro</button>
+            <div class="benefit-block">
+              <h3>Everything in Free, plus:</h3>
+              <ul class="benefit-list">
+                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>20,000 credits every month</span></li>
+                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>Access to advanced models</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="plan-card" aria-labelledby="ultra-title">
+            <div class="plan-topline">
+              <h2 id="ultra-title">Ultra</h2>
+            </div>
+            <div class="price-row" aria-label="$30 per month">
+              <span class="price-value">$30</span>
+              <span class="price-unit">/ month</span>
+            </div>
+            <p class="plan-positioning">More capacity with priority task processing.</p>
+            <button class="plan-action plan-action--secondary" type="button">Upgrade to Ultra</button>
+            <div class="benefit-block">
+              <h3>Everything in Pro, plus:</h3>
+              <ul class="benefit-list">
+                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>60,000 credits every month</span></li>
+                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>Priority processing for your tasks</span></li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <p class="credits-help">Credits are used across AI chat, document generation, and Slides.</p>
+
+        <div class="terms" aria-label="Subscription terms">
+          <p><span class="term-icon" aria-hidden="true">↻</span><span>Paid plans renew automatically every month.</span></p>
+          <p><span class="term-icon" aria-hidden="true">×</span><span>Cancel anytime.</span></p>
+          <p><span class="term-icon" aria-hidden="true">✓</span><span>New benefits are available as soon as your subscription is confirmed.</span></p>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
