@@ -27,15 +27,6 @@
     <symbol id="icon-priority" viewBox="0 0 24 24">
       <path d="M5 17 10 12l3 3 6-7"/><path d="M15 8h4v4"/>
     </symbol>
-    <symbol id="icon-renew" viewBox="0 0 24 24">
-      <path d="M5 8a8 8 0 0 1 13.2-1.6L20 8"/><path d="M20 4v4h-4M19 16a8 8 0 0 1-13.2 1.6L4 16"/><path d="M4 20v-4h4"/>
-    </symbol>
-    <symbol id="icon-close" viewBox="0 0 24 24">
-      <path d="M7 7l10 10M17 7 7 17"/>
-    </symbol>
-    <symbol id="icon-check" viewBox="0 0 24 24">
-      <path d="m5 12 4 4L19 6"/>
-    </symbol>
   </svg>
 
   <div class="app-shell">
@@ -86,6 +77,14 @@
       </section>
 
       <section class="pricing-section" aria-label="Plan comparison">
+        <div class="pricing-toolbar">
+          <div class="billing-selector" role="tablist" aria-label="Billing period">
+            <button class="billing-option" type="button" role="tab" aria-selected="false">Yearly <span>50% off</span></button>
+            <button class="billing-option billing-option--active" type="button" role="tab" aria-selected="true">Monthly <span>40% off</span></button>
+            <button class="billing-option" type="button" role="tab" aria-selected="false">1-month</button>
+          </div>
+        </div>
+
         <div class="plan-grid">
           <article class="plan-card" aria-labelledby="free-title">
             <div class="plan-topline">
@@ -153,14 +152,6 @@
               </ul>
             </div>
           </article>
-        </div>
-
-        <p class="credits-help">Credits are used across AI chat, document generation, and Slides.</p>
-
-        <div class="terms" aria-label="Subscription terms">
-          <p><svg class="term-icon" aria-hidden="true"><use href="#icon-renew"/></svg><span>Paid plans renew automatically every month.</span></p>
-          <p><svg class="term-icon" aria-hidden="true"><use href="#icon-close"/></svg><span>Cancel anytime.</span></p>
-          <p><svg class="term-icon" aria-hidden="true"><use href="#icon-check"/></svg><span>New benefits are available as soon as your subscription is confirmed.</span></p>
         </div>
       </section>
     </main>
