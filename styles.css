@@ -4,6 +4,7 @@
   --ink: #171a20;
   --body: #393c41;
   --tertiary: #5c5e62;
+  --placeholder: #8e8e8e;
   --divider: #eeeeee;
   --control-border: #d0d1d2;
   --action: #3e6ae1;
@@ -36,7 +37,20 @@ body {
 button, a { font: inherit; }
 a { color: inherit; text-decoration: none; }
 button { border: 0; }
+button:disabled { opacity: 1; }
+[hidden] { display: none !important; }
 .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 .app-shell {
   min-height: 100vh;
@@ -92,12 +106,14 @@ button { border: 0; }
   flex: 0 0 auto;
 }
 .nav-item:hover { background: #f7f7f7; color: var(--ink); }
+.nav-item:active { background: var(--divider); color: var(--ink); }
 .nav-item--new { margin-bottom: 12px; }
 .nav-item--active { background: var(--surface); color: var(--ink); }
 .nav-item:focus-visible,
 .product-mark:focus-visible,
 .plan-action:focus-visible,
-.billing-option:focus-visible {
+.billing-option:focus-visible,
+.modal-close:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
@@ -196,10 +212,8 @@ h1 {
   background: var(--canvas);
   color: var(--ink);
 }
-.billing-option:not(.billing-option--active):hover {
-  background: var(--divider);
-  color: var(--body);
-}
+.billing-option--active:hover { background: var(--canvas); color: var(--ink); }
+.billing-option:disabled { color: var(--tertiary); cursor: default; }
 
 .plan-grid {
   display: grid;
@@ -216,9 +230,7 @@ h1 {
   border: 1px solid transparent;
   border-radius: var(--radius-card);
 }
-.plan-card--pro {
-  border-color: var(--action);
-}
+.plan-card--pro { border-color: var(--action); }
 .plan-topline {
   min-height: 24px;
   display: flex;
@@ -232,6 +244,11 @@ h1 {
   line-height: 24px;
   font-weight: 500;
   letter-spacing: normal;
+}
+.plan-topline h2:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+  border-radius: 1px;
 }
 .recommended {
   color: var(--body);
@@ -280,6 +297,7 @@ h1 {
 .plan-action--current {
   background: var(--canvas);
   color: var(--ink);
+  cursor: default;
 }
 .plan-action--primary {
   background: var(--action);
@@ -288,6 +306,12 @@ h1 {
 }
 .plan-action--primary:hover { background: var(--action-hover); }
 .plan-action--primary:active { background: var(--action-pressed); }
+.plan-action--primary:disabled,
+.plan-action--primary.is-processing {
+  background: var(--control-border);
+  color: var(--tertiary);
+  cursor: wait;
+}
 .plan-action--secondary {
   background: var(--canvas);
   color: var(--body);
@@ -295,6 +319,11 @@ h1 {
 }
 .plan-action--secondary:hover { background: #fafafa; color: var(--ink); }
 .plan-action--secondary:active { background: var(--divider); }
+.plan-action--placeholder {
+  color: transparent;
+  background: transparent;
+  pointer-events: none;
+}
 
 .credit-summary {
   min-height: 112px;
@@ -343,9 +372,7 @@ h1 {
 .credit-progress-fill--pro { width: 33.333%; }
 .credit-progress-fill--ultra { width: 100%; }
 
-.benefit-block {
-  margin-top: 16px;
-}
+.benefit-block { margin-top: 16px; }
 .benefit-block h3 {
   margin-bottom: 16px;
   color: var(--ink);
@@ -367,6 +394,143 @@ h1 {
   gap: 12px;
   align-items: start;
   color: var(--body);
+}
+
+.pricing-footnotes {
+  padding: 24px 8px 0;
+}
+.credits-helper {
+  margin-bottom: 0;
+  color: var(--tertiary);
+  font-size: 14px;
+  line-height: 20px;
+}
+.subscription-terms {
+  margin-top: 16px;
+  padding-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  border-top: 1px solid var(--divider);
+  color: var(--tertiary);
+}
+.subscription-terms p {
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+body.modal-open { overflow: hidden; }
+.modal-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(128, 128, 128, 0.65);
+}
+.modal {
+  position: relative;
+  width: min(600px, calc(100vw - 48px));
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  padding: 40px;
+  background: var(--canvas);
+  border-radius: var(--radius-control);
+  box-shadow: none;
+}
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--body);
+  cursor: pointer;
+  transition: background-color 330ms var(--ease), color 330ms var(--ease);
+}
+.modal-close:hover { background: var(--surface); color: var(--ink); }
+.modal-close:active { background: var(--divider); }
+.modal-close svg,
+.success-symbol svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.success-symbol {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius-control);
+  color: var(--ink);
+}
+.modal h2 {
+  margin: 24px 56px 0 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 500;
+  letter-spacing: normal;
+}
+.modal h2:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+  border-radius: 1px;
+}
+.modal-copy {
+  max-width: 480px;
+  margin: 8px 0 0;
+  color: var(--body);
+  font-size: 14px;
+  line-height: 20px;
+}
+.modal-benefit-group {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--divider);
+}
+.modal-benefit-group h3 {
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+.modal-benefit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.modal-benefit-list li {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 12px;
+  color: var(--body);
+  font-size: 14px;
+  line-height: 20px;
+}
+.modal-actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: flex-end;
+}
+.modal-primary {
+  width: 200px;
+  margin-top: 0;
 }
 
 @media (min-width: 1760px) {
@@ -407,6 +571,11 @@ h1 {
   .credit-summary { min-height: 104px; margin-top: 32px; padding: 16px; }
   .benefit-block { margin-top: 16px; }
   .benefit-list { gap: 16px; }
+  .subscription-terms { gap: 16px; }
+}
+
+@media (max-height: 760px) {
+  .modal { max-height: calc(100vh - 32px); padding: 32px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
