@@ -8,6 +8,36 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="icon-credits" viewBox="0 0 24 24">
+      <path d="M4.9 7.8A8 8 0 1 1 4 12"/><path d="M4 5v4h4"/><path d="M12 8v4l2.6 1.6"/>
+    </symbol>
+    <symbol id="icon-chat" viewBox="0 0 24 24">
+      <path d="M5 6.5h14v9H9l-4 3v-12Z"/><path d="M9 10h6M9 13h4"/>
+    </symbol>
+    <symbol id="icon-doc" viewBox="0 0 24 24">
+      <path d="M7 3.5h7l3 3V20H7z"/><path d="M14 3.5V7h3M9.5 11h5M9.5 14h5M9.5 17h3.5"/>
+    </symbol>
+    <symbol id="icon-slides" viewBox="0 0 24 24">
+      <rect x="4" y="5" width="16" height="12" rx="1"/><path d="M8 20h8M12 17v3M8 9h8M8 12h5"/>
+    </symbol>
+    <symbol id="icon-model" viewBox="0 0 24 24">
+      <circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="7" r="2.5"/><circle cx="12" cy="17" r="2.5"/><path d="M9.2 8.4 11 14.6M14.8 8.4 13 14.6M9.5 7h5"/>
+    </symbol>
+    <symbol id="icon-priority" viewBox="0 0 24 24">
+      <path d="M5 17 10 12l3 3 6-7"/><path d="M15 8h4v4"/>
+    </symbol>
+    <symbol id="icon-renew" viewBox="0 0 24 24">
+      <path d="M5 8a8 8 0 0 1 13.2-1.6L20 8"/><path d="M20 4v4h-4M19 16a8 8 0 0 1-13.2 1.6L4 16"/><path d="M4 20v-4h4"/>
+    </symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24">
+      <path d="M7 7l10 10M17 7 7 17"/>
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24">
+      <path d="m5 12 4 4L19 6"/>
+    </symbol>
+  </svg>
+
   <div class="app-shell">
     <aside class="sidebar" aria-label="Product navigation">
       <div class="sidebar-top">
@@ -70,10 +100,10 @@
             <div class="benefit-block">
               <h3>Includes:</h3>
               <ul class="benefit-list">
-                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>1,000 credits every month</span></li>
-                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>AI chat for everyday questions and tasks</span></li>
-                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>Create and refine documents</span></li>
-                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>Create presentations with Slides</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-credits"/></svg><span>1,000 credits every month</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-chat"/></svg><span>AI chat for everyday questions and tasks</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-doc"/></svg><span>Create and refine documents</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-slides"/></svg><span>Create presentations with Slides</span></li>
               </ul>
             </div>
           </article>
@@ -92,8 +122,11 @@
             <div class="benefit-block">
               <h3>Everything in Free, plus:</h3>
               <ul class="benefit-list">
-                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>20,000 credits every month</span></li>
-                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>Access to advanced models</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-credits"/></svg><span>20,000 credits every month</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-chat"/></svg><span>AI chat for everyday questions and tasks</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-doc"/></svg><span>Create and refine documents</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-slides"/></svg><span>Create presentations with Slides</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-model"/></svg><span>Access to advanced models</span></li>
               </ul>
             </div>
           </article>
@@ -111,8 +144,12 @@
             <div class="benefit-block">
               <h3>Everything in Pro, plus:</h3>
               <ul class="benefit-list">
-                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>60,000 credits every month</span></li>
-                <li><span class="benefit-icon" aria-hidden="true">✓</span><span>Priority processing for your tasks</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-credits"/></svg><span>60,000 credits every month</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-chat"/></svg><span>AI chat for everyday questions and tasks</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-doc"/></svg><span>Create and refine documents</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-slides"/></svg><span>Create presentations with Slides</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-model"/></svg><span>Access to advanced models</span></li>
+                <li><svg class="benefit-icon" aria-hidden="true"><use href="#icon-priority"/></svg><span>Priority processing for your tasks</span></li>
               </ul>
             </div>
           </article>
@@ -121,9 +158,9 @@
         <p class="credits-help">Credits are used across AI chat, document generation, and Slides.</p>
 
         <div class="terms" aria-label="Subscription terms">
-          <p><span class="term-icon" aria-hidden="true">↻</span><span>Paid plans renew automatically every month.</span></p>
-          <p><span class="term-icon" aria-hidden="true">×</span><span>Cancel anytime.</span></p>
-          <p><span class="term-icon" aria-hidden="true">✓</span><span>New benefits are available as soon as your subscription is confirmed.</span></p>
+          <p><svg class="term-icon" aria-hidden="true"><use href="#icon-renew"/></svg><span>Paid plans renew automatically every month.</span></p>
+          <p><svg class="term-icon" aria-hidden="true"><use href="#icon-close"/></svg><span>Cancel anytime.</span></p>
+          <p><svg class="term-icon" aria-hidden="true"><use href="#icon-check"/></svg><span>New benefits are available as soon as your subscription is confirmed.</span></p>
         </div>
       </section>
     </main>
