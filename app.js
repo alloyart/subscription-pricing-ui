@@ -32,6 +32,7 @@
   const proCurrent = document.querySelector("#pro-current");
   const proRecommended = document.querySelector("#pro-recommended");
   const ultraRecommended = document.querySelector("#ultra-recommended");
+  const ultraCta = ultraCard?.querySelector(".plan-action");
   const sidebarPlan = document.querySelector("#sidebar-plan");
   const planStatus = document.querySelector("#plan-status");
   const successLayer = document.querySelector("#success-layer");
@@ -41,7 +42,7 @@
   const startUsing = document.querySelector("#start-using");
   const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  if (!appShell || !freeCard || !proCard || !ultraCard || !proTitle || !freeCurrent || !proCta || !proCurrent || !proRecommended || !ultraRecommended || !sidebarPlan || !planStatus || !successLayer || !modal || !modalTitle || !modalClose || !startUsing) {
+  if (!appShell || !freeCard || !proCard || !ultraCard || !proTitle || !freeCurrent || !proCta || !proCurrent || !proRecommended || !ultraRecommended || !ultraCta || !sidebarPlan || !planStatus || !successLayer || !modal || !modalTitle || !modalClose || !startUsing) {
     return;
   }
 
@@ -90,6 +91,8 @@
 
     ultraCard.classList.add("is-recommended");
     ultraRecommended.hidden = false;
+    ultraCta.classList.remove("plan-action--secondary");
+    ultraCta.classList.add("plan-action--primary");
 
     sidebarPlan.textContent = COPY.accountPro;
     planStatus.textContent = COPY.successAnnouncement;
