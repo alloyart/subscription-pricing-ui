@@ -1,4 +1,12 @@
 (() => {
+  if (!document.querySelector('link[data-stage3-motion]')) {
+    const motionStylesheet = document.createElement("link");
+    motionStylesheet.rel = "stylesheet";
+    motionStylesheet.href = "motion.css";
+    motionStylesheet.dataset.stage3Motion = "true";
+    document.head.appendChild(motionStylesheet);
+  }
+
   const COPY = Object.freeze({
     accountFree: "Free",
     accountPro: "Pro",
@@ -6,6 +14,12 @@
     upgradePro: "Upgrade to Pro",
     upgradingPro: "Upgrading to Pro…",
     successAnnouncement: "Your plan is now active. You can use your Pro benefits immediately."
+  });
+
+  const MOTION = Object.freeze({
+    modalOpenMs: 260,
+    modalCloseMs: 180,
+    processingMs: 300
   });
 
   const appShell = document.querySelector("#app-shell");
@@ -22,6 +36,7 @@
   const modalTitle = document.querySelector("#modal-title");
   const modalClose = document.querySelector("#modal-close");
   const startUsing = document.querySelector("#start-using");
+  const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   if (!appShell || !freeCard || !proCard || !proTitle || !freeCurrent || !proCta || !proCurrent || !sidebarPlan || !planStatus || !successLayer || !modal || !modalTitle || !modalClose || !startUsing) {
     return;
@@ -29,8 +44,23 @@
 
   let processing = false;
   let subscribed = false;
+  let modalState = "closed";
+  let closeTimer = null;
+  let openFrame = null;
 
   const getFocusableModalControls = () => [modalClose, startUsing].filter((element) => !element.disabled && !element.hidden);
+  const motionDuration = (ms) => motionPreference.matches ? 0 : ms;
+
+  function clearMotionHandles() {
+    if (closeTimer !== null) {
+      window.clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+    if (openFrame !== null) {
+      window.cancelAnimationFrame(openFrame);
+      openFrame = null;
+    }
+  }
 
   function applyProState() {
     subscribed = true;
@@ -57,21 +87,61 @@
     planStatus.textContent = COPY.successAnnouncement;
   }
 
-  function openModal() {
-    successLayer.hidden = false;
-    appShell.inert = true;
-    appShell.setAttribute("aria-hidden", "true");
-    document.body.classList.add("modal-open");
-    modalTitle.focus();
-  }
-
-  function closeModal() {
-    if (successLayer.hidden) return;
+  function finalizeModalClose() {
     successLayer.hidden = true;
+    successLayer.classList.remove("is-open", "is-closing");
     appShell.inert = false;
     appShell.removeAttribute("aria-hidden");
     document.body.classList.remove("modal-open");
-    proTitle.focus();
+    modalState = "closed";
+    closeTimer = null;
+    proTitle.focus({ preventScroll: true });
+  }
+
+  function openModal({ focus = true } = {}) {
+    if (modalState === "open" || modalState === "opening") return;
+
+    clearMotionHandles();
+    modalState = "opening";
+    successLayer.hidden = false;
+    successLayer.classList.remove("is-closing");
+    appShell.inert = true;
+    appShell.setAttribute("aria-hidden", "true");
+    document.body.classList.add("modal-open");
+
+    // Force a clean initial frame so reopening never inherits stale transforms.
+    void successLayer.offsetWidth;
+    openFrame = window.requestAnimationFrame(() => {
+      successLayer.classList.add("is-open");
+      modalState = "open";
+      openFrame = null;
+      if (focus) modalTitle.focus({ preventScroll: true });
+    });
+  }
+
+  function closeModal() {
+    if (modalState === "closed" || modalState === "closing") return;
+
+    clearMotionHandles();
+    modalState = "closing";
+    successLayer.classList.add("is-closing");
+    successLayer.classList.remove("is-open");
+
+    const duration = motionDuration(MOTION.modalCloseMs);
+    if (duration === 0) {
+      finalizeModalClose();
+      return;
+    }
+
+    closeTimer = window.setTimeout(finalizeModalClose, duration + 24);
+  }
+
+  function resetProcessingState() {
+    processing = false;
+    proCard.removeAttribute("aria-busy");
+    proCta.disabled = false;
+    proCta.classList.remove("is-processing");
+    proCta.textContent = COPY.upgradePro;
   }
 
   function startUpgrade() {
@@ -85,14 +155,20 @@
     planStatus.textContent = COPY.upgradingPro;
 
     window.setTimeout(() => {
-      processing = false;
-      applyProState();
-      openModal();
-    }, 300);
+      try {
+        processing = false;
+        applyProState();
+        openModal();
+      } catch (error) {
+        // Keep the approved UI recoverable without inventing an unapproved product error flow.
+        resetProcessingState();
+        console.error("Prototype state transition failed", error);
+      }
+    }, MOTION.processingMs);
   }
 
   function trapModalFocus(event) {
-    if (event.key !== "Tab" || successLayer.hidden) return;
+    if (event.key !== "Tab" || successLayer.hidden || modalState === "closing") return;
     const focusable = getFocusableModalControls();
     if (!focusable.length) return;
 
@@ -103,6 +179,12 @@
     if (active === modalTitle) {
       event.preventDefault();
       (event.shiftKey ? last : first).focus();
+      return;
+    }
+
+    if (!modal.contains(active)) {
+      event.preventDefault();
+      first.focus();
       return;
     }
 
@@ -118,8 +200,13 @@
   proCta.addEventListener("click", startUpgrade);
   modalClose.addEventListener("click", closeModal);
   startUsing.addEventListener("click", closeModal);
+
+  // Approved behavior: clicking the overlay does not dismiss this confirmation dialog.
   successLayer.addEventListener("click", (event) => {
-    if (event.target === successLayer) event.preventDefault();
+    if (event.target === successLayer) {
+      event.preventDefault();
+      modal.focus?.({ preventScroll: true });
+    }
   });
 
   document.addEventListener("keydown", (event) => {
@@ -130,6 +217,11 @@
       return;
     }
     trapModalFocus(event);
+  });
+
+  // Keep reduced-motion changes deterministic even if the preference changes mid-session.
+  motionPreference.addEventListener?.("change", () => {
+    if (motionPreference.matches && modalState === "closing") finalizeModalClose();
   });
 
   const debugState = new URLSearchParams(window.location.search).get("state");
