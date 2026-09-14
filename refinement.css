@@ -1,0 +1,38 @@
+/* Stage 3 visual refinements constrained to the approved Tesla-derived system. */
+
+/* Current-plan is a neutral, non-interactive state rather than an actionable CTA. */
+.plan-action--current,
+.plan-action--current:hover,
+.plan-action--current:active {
+  background: var(--divider);
+  color: var(--placeholder);
+  border: 1px solid transparent;
+  cursor: default;
+}
+
+/* Recommended uses only Electric Blue, with a restrained tint of the same accent. */
+.recommended {
+  min-height: 24px;
+  padding: 2px 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-control);
+  background: rgba(62, 106, 225, 0.12);
+  color: var(--action);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.recommended[hidden] { display: none !important; }
+
+/* Recommendation outline follows the currently recommended upgrade target. */
+.plan-card.is-recommended { border-color: var(--action); }
+.plan-card--pro:not(.is-recommended) { border-color: transparent; }
+
+/* Credit capacity bars share one scale: Free 1k / Pro 20k / Ultra 60k. */
+.credit-progress-fill--free {
+  width: 1.667%;
+  min-width: 8px;
+}
