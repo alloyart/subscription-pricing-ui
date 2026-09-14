@@ -6,8 +6,8 @@
   <title>Plans & pricing</title>
   <meta name="description" content="Subscription plan comparison" />
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="refinement.css?v=20260914-1152" />
-  <script src="app.js?v=20260914-1152" defer></script>
+  <link rel="stylesheet" href="refinement.css?v=20260914-stage4" />
+  <script src="app.js?v=20260914-stage4" defer></script>
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true" focusable="false">
@@ -40,27 +40,27 @@
   <div class="app-shell" id="app-shell" data-current-plan="free">
     <aside class="sidebar" aria-label="Product navigation">
       <div class="sidebar-top">
-        <a class="product-mark" href="#" aria-label="Product home">
+        <a class="product-mark" href="#page-title" aria-label="Product home">
           <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
         </a>
         <nav class="nav-list">
-          <a class="nav-item nav-item--new" href="#">
+          <span class="nav-item nav-item--new nav-item--disabled" aria-disabled="true">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
             <span>New task</span>
-          </a>
-          <a class="nav-item" href="#">
+          </span>
+          <span class="nav-item nav-item--disabled" aria-disabled="true">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7.5a4 4 0 1 1 8 0c0 4.5 3 4.2 3 7.5H5c0-3.3 3-3 3-7.5Z"/><path d="M9.5 18h5"/></svg>
             <span>Assistant</span>
-          </a>
-          <a class="nav-item" href="#">
+          </span>
+          <span class="nav-item nav-item--disabled" aria-disabled="true">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h7l3 3v13H7z"/><path d="M14 4v4h4M9.5 12h5M9.5 15h5"/></svg>
             <span>Docs</span>
-          </a>
-          <a class="nav-item" href="#">
+          </span>
+          <span class="nav-item nav-item--disabled" aria-disabled="true">
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="1"/><path d="M8 20h8M12 16v4M8 12l3-3 2.5 2.5L16 9"/></svg>
             <span>Slides</span>
-          </a>
-          <a class="nav-item nav-item--active" href="#" aria-current="page">
+          </span>
+          <a class="nav-item nav-item--active" href="#pricing-section" aria-current="page">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h12v12H6z"/><path d="M9 9h6M9 12h6M9 15h3"/></svg>
             <span>Plans</span>
           </a>
@@ -80,10 +80,10 @@
     <main class="main-content">
       <section class="page-intro" aria-labelledby="page-title">
         <div class="page-heading-row">
-          <h1 id="page-title">Plans &amp; pricing</h1>
+          <h1 id="page-title" tabindex="-1">Plans &amp; pricing</h1>
           <div class="billing-selector" role="tablist" aria-label="Billing period">
             <button class="billing-option" type="button" role="tab" aria-selected="false" aria-disabled="true" disabled>Yearly <span>50% off</span></button>
-            <button class="billing-option billing-option--active" type="button" role="tab" aria-selected="true" tabindex="0">Monthly <span>40% off</span></button>
+            <button class="billing-option billing-option--active" id="billing-monthly" type="button" role="tab" aria-selected="true" tabindex="0">Monthly <span>40% off</span></button>
             <button class="billing-option" type="button" role="tab" aria-selected="false" aria-disabled="true" disabled>1-month</button>
           </div>
         </div>
@@ -91,7 +91,7 @@
         <p class="page-support">Upgrade for more monthly credits and advanced capabilities.</p>
       </section>
 
-      <section class="pricing-section" aria-label="Plan comparison">
+      <section class="pricing-section" id="pricing-section" aria-label="Plan comparison">
         <div class="plan-grid">
           <article class="plan-card is-current" id="free-card" aria-labelledby="free-title" aria-current="true">
             <div class="plan-topline">
@@ -136,6 +136,7 @@
             <p class="plan-positioning">More capacity and advanced models for regular work.</p>
             <button class="plan-action plan-action--primary" id="pro-cta" type="button">Upgrade to Pro</button>
             <div class="plan-action plan-action--current" id="pro-current" aria-label="Your current plan" hidden>Your current plan</div>
+            <p class="plan-feedback" id="pro-feedback" role="alert" hidden></p>
 
             <div class="credit-summary" aria-label="20,000 credits every month">
               <div class="credit-summary-copy">
@@ -167,7 +168,7 @@
               <span class="price-unit">/ month</span>
             </div>
             <p class="plan-positioning">More capacity with priority task processing.</p>
-            <button class="plan-action plan-action--secondary" type="button">Upgrade to Ultra</button>
+            <button class="plan-action plan-action--secondary" id="ultra-cta" type="button" aria-disabled="true" disabled>Upgrade to Ultra</button>
 
             <div class="credit-summary" aria-label="60,000 credits every month">
               <div class="credit-summary-copy">
@@ -207,7 +208,7 @@
   </div>
 
   <div class="modal-layer" id="success-layer" hidden>
-    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-copy">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-copy" tabindex="-1">
       <button class="modal-close" id="modal-close" type="button" aria-label="Close Pro confirmation">
         <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-close"/></svg>
       </button>
