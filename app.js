@@ -25,11 +25,13 @@
   const appShell = document.querySelector("#app-shell");
   const freeCard = document.querySelector("#free-card");
   const proCard = document.querySelector("#pro-card");
+  const ultraCard = document.querySelector("#ultra-card");
   const proTitle = document.querySelector("#pro-title");
   const freeCurrent = document.querySelector("#free-current");
   const proCta = document.querySelector("#pro-cta");
   const proCurrent = document.querySelector("#pro-current");
   const proRecommended = document.querySelector("#pro-recommended");
+  const ultraCta = ultraCard?.querySelector(".plan-action");
   const sidebarPlan = document.querySelector("#sidebar-plan");
   const planStatus = document.querySelector("#plan-status");
   const successLayer = document.querySelector("#success-layer");
@@ -39,7 +41,7 @@
   const startUsing = document.querySelector("#start-using");
   const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  if (!appShell || !freeCard || !proCard || !proTitle || !freeCurrent || !proCta || !proCurrent || !proRecommended || !sidebarPlan || !planStatus || !successLayer || !modal || !modalTitle || !modalClose || !startUsing) {
+  if (!appShell || !freeCard || !proCard || !ultraCard || !proTitle || !freeCurrent || !proCta || !proCurrent || !proRecommended || !ultraCta || !sidebarPlan || !planStatus || !successLayer || !modal || !modalTitle || !modalClose || !startUsing) {
     return;
   }
 
@@ -51,6 +53,15 @@
 
   const getFocusableModalControls = () => [modalClose, startUsing].filter((element) => !element.disabled && !element.hidden);
   const motionDuration = (ms) => motionPreference.matches ? 0 : ms;
+
+  function normalizeUltraDefaultState() {
+    ultraCard.classList.remove("is-recommended", "is-current", "plan-card--pro");
+    ultraCard.removeAttribute("aria-current");
+    ultraCard.querySelector(".recommended")?.remove();
+    ultraCta.classList.remove("plan-action--primary", "is-processing");
+    ultraCta.classList.add("plan-action--secondary");
+    ultraCta.disabled = false;
+  }
 
   function clearMotionHandles() {
     if (closeTimer !== null) {
@@ -85,6 +96,8 @@
     proCta.textContent = COPY.upgradePro;
     proCurrent.hidden = false;
     proCurrent.textContent = COPY.currentPlan;
+
+    normalizeUltraDefaultState();
 
     sidebarPlan.textContent = COPY.accountPro;
     planStatus.textContent = COPY.successAnnouncement;
@@ -222,6 +235,8 @@
   motionPreference.addEventListener?.("change", () => {
     if (motionPreference.matches && modalState === "closing") finalizeModalClose();
   });
+
+  normalizeUltraDefaultState();
 
   const debugState = new URLSearchParams(window.location.search).get("state");
   if (debugState === "loading") {
