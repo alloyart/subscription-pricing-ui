@@ -25,10 +25,13 @@
   const appShell = document.querySelector("#app-shell");
   const freeCard = document.querySelector("#free-card");
   const proCard = document.querySelector("#pro-card");
+  const ultraCard = document.querySelector("#ultra-card");
   const proTitle = document.querySelector("#pro-title");
   const freeCurrent = document.querySelector("#free-current");
   const proCta = document.querySelector("#pro-cta");
   const proCurrent = document.querySelector("#pro-current");
+  const proRecommended = document.querySelector("#pro-recommended");
+  const ultraRecommended = document.querySelector("#ultra-recommended");
   const sidebarPlan = document.querySelector("#sidebar-plan");
   const planStatus = document.querySelector("#plan-status");
   const successLayer = document.querySelector("#success-layer");
@@ -38,7 +41,7 @@
   const startUsing = document.querySelector("#start-using");
   const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  if (!appShell || !freeCard || !proCard || !proTitle || !freeCurrent || !proCta || !proCurrent || !sidebarPlan || !planStatus || !successLayer || !modal || !modalTitle || !modalClose || !startUsing) {
+  if (!appShell || !freeCard || !proCard || !ultraCard || !proTitle || !freeCurrent || !proCta || !proCurrent || !proRecommended || !ultraRecommended || !sidebarPlan || !planStatus || !successLayer || !modal || !modalTitle || !modalClose || !startUsing) {
     return;
   }
 
@@ -74,14 +77,19 @@
     freeCurrent.setAttribute("aria-hidden", "true");
 
     proCard.classList.add("is-current");
+    proCard.classList.remove("is-recommended");
     proCard.setAttribute("aria-current", "true");
     proCard.removeAttribute("aria-busy");
+    proRecommended.hidden = true;
     proCta.hidden = true;
     proCta.disabled = false;
     proCta.classList.remove("is-processing");
     proCta.textContent = COPY.upgradePro;
     proCurrent.hidden = false;
     proCurrent.textContent = COPY.currentPlan;
+
+    ultraCard.classList.add("is-recommended");
+    ultraRecommended.hidden = false;
 
     sidebarPlan.textContent = COPY.accountPro;
     planStatus.textContent = COPY.successAnnouncement;
@@ -109,7 +117,6 @@
     appShell.setAttribute("aria-hidden", "true");
     document.body.classList.add("modal-open");
 
-    // Force a clean initial frame so reopening never inherits stale transforms.
     void successLayer.offsetWidth;
     openFrame = window.requestAnimationFrame(() => {
       successLayer.classList.add("is-open");
@@ -160,7 +167,6 @@
         applyProState();
         openModal();
       } catch (error) {
-        // Keep the approved UI recoverable without inventing an unapproved product error flow.
         resetProcessingState();
         console.error("Prototype state transition failed", error);
       }
@@ -201,7 +207,6 @@
   modalClose.addEventListener("click", closeModal);
   startUsing.addEventListener("click", closeModal);
 
-  // Approved behavior: clicking the overlay does not dismiss this confirmation dialog.
   successLayer.addEventListener("click", (event) => {
     if (event.target === successLayer) {
       event.preventDefault();
@@ -219,7 +224,6 @@
     trapModalFocus(event);
   });
 
-  // Keep reduced-motion changes deterministic even if the preference changes mid-session.
   motionPreference.addEventListener?.("change", () => {
     if (motionPreference.matches && modalState === "closing") finalizeModalClose();
   });
