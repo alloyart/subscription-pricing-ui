@@ -83,3 +83,48 @@
 .modal h2:focus-visible {
   outline: none;
 }
+
+/*
+  Full-document modal scrim.
+  A fixed overlay correctly covers the live viewport, but Chrome's full-page capture
+  serializes content below that viewport as well. Put the scrim on the document body
+  so both the live viewport and the complete reference capture are consistently dimmed,
+  while the dialog itself remains fixed and viewport-centered.
+*/
+body.modal-open {
+  position: relative;
+}
+
+body.modal-open::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 19;
+  background: rgba(128, 128, 128, 0.65);
+  pointer-events: none;
+  animation: document-scrim-in 200ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Avoid double-darkening the visible viewport; the body pseudo-element owns the scrim. */
+body.modal-open .modal-layer {
+  background: transparent;
+}
+
+/* Match the existing modal close timing before the modal-open class is removed. */
+body.modal-open:has(.modal-layer.is-closing)::before {
+  opacity: 0;
+  transition: opacity 180ms cubic-bezier(0.4, 0, 1, 1);
+  animation: none;
+}
+
+@keyframes document-scrim-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.modal-open::before {
+    animation: none;
+    transition: none;
+  }
+}
