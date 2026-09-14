@@ -85,6 +85,54 @@
 }
 
 /*
+  Tesla-compatible ambient depth.
+  The reference mood is translated into flat tonal planes only: Pure White + Light Ash,
+  low-opacity layering, no gradients, no blur, no glow, no shadow, and no added chromatic color.
+  Pseudo-elements sit behind existing content so spacing and interaction geometry remain unchanged.
+*/
+.main-content {
+  position: relative;
+  isolation: isolate;
+  background: var(--canvas);
+}
+
+.page-intro,
+.pricing-section {
+  position: relative;
+  z-index: 1;
+}
+
+.page-intro::before {
+  content: "";
+  position: absolute;
+  inset: -16px -24px 0;
+  z-index: -1;
+  background: rgba(244, 244, 244, 0.34);
+  border-radius: var(--radius-card);
+  pointer-events: none;
+}
+
+.pricing-section::before {
+  content: "";
+  position: absolute;
+  inset: -8px -24px -24px;
+  z-index: -1;
+  background: rgba(244, 244, 244, 0.18);
+  border-radius: var(--radius-card);
+  pointer-events: none;
+}
+
+.plan-card {
+  background: rgba(244, 244, 244, 0.9);
+}
+
+.credit-summary,
+.billing-option--active,
+.plan-action--secondary {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+/*
   Full-document modal scrim.
   A fixed overlay correctly covers the live viewport, but Chrome's full-page capture
   serializes content below that viewport as well. Put the scrim on the document body
@@ -120,6 +168,16 @@ body.modal-open:has(.modal-layer.is-closing)::before {
 @keyframes document-scrim-in {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@media (max-width: 1350px) {
+  .page-intro::before {
+    inset-inline: -16px;
+  }
+
+  .pricing-section::before {
+    inset-inline: -16px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
