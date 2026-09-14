@@ -31,6 +31,20 @@
 .plan-card.is-recommended { border-color: var(--action); }
 .plan-card--pro:not(.is-recommended) { border-color: transparent; }
 
+/* When Ultra becomes the recommended next upgrade, its CTA inherits the approved primary CTA treatment. */
+.plan-card.is-recommended .plan-action--secondary {
+  background: var(--action);
+  color: var(--canvas);
+}
+.plan-card.is-recommended .plan-action--secondary:hover {
+  background: var(--action-hover);
+  color: var(--canvas);
+}
+.plan-card.is-recommended .plan-action--secondary:active {
+  background: var(--action-pressed);
+  color: var(--canvas);
+}
+
 /* Credit capacity bars share one scale: Free 1k / Pro 20k / Ultra 60k. */
 .credit-progress-fill--free {
   width: 1.667%;
