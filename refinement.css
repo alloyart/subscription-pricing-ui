@@ -31,12 +31,12 @@
 .plan-card--pro.is-recommended { border-color: var(--action); }
 .plan-card--pro:not(.is-recommended) { border-color: transparent; }
 
-/* Out-of-scope navigation remains visible but clearly non-interactive. */
+/* Out-of-scope navigation remains visible but cannot behave like a dead link. */
 .nav-item--disabled,
 .nav-item--disabled:hover,
 .nav-item--disabled:active {
   background: transparent;
-  color: var(--placeholder);
+  color: var(--body);
   cursor: default;
 }
 
@@ -46,7 +46,8 @@
 }
 #ultra-card .plan-action--secondary,
 #ultra-card .plan-action--secondary:hover,
-#ultra-card .plan-action--secondary:active {
+#ultra-card .plan-action--secondary:active,
+#ultra-card .plan-action--secondary:disabled {
   background: var(--canvas);
   color: var(--body);
 }
@@ -59,15 +60,7 @@
   color: var(--ink);
 }
 #ultra-card .plan-action--secondary:disabled {
-  background: var(--divider);
-  color: var(--placeholder);
   cursor: default;
-}
-
-/* Programmatic modal focus remains visible without reading like a full-width input field. */
-.modal h2 {
-  width: fit-content;
-  max-width: calc(100% - 56px);
 }
 
 /* Minimal deterministic mock-error feedback; no new chromatic error token is introduced. */
