@@ -31,23 +31,45 @@
 .plan-card--pro.is-recommended { border-color: var(--action); }
 .plan-card--pro:not(.is-recommended) { border-color: transparent; }
 
+/* Out-of-scope navigation remains visible but cannot behave like a dead link. */
+.nav-item--disabled,
+.nav-item--disabled:hover,
+.nav-item--disabled:active {
+  background: transparent;
+  color: var(--body);
+  cursor: default;
+}
+
 /* Ultra remains the default neutral card and secondary action in every Pro-completed state. */
 #ultra-card {
   border-color: transparent;
 }
 #ultra-card .plan-action--secondary,
 #ultra-card .plan-action--secondary:hover,
-#ultra-card .plan-action--secondary:active {
+#ultra-card .plan-action--secondary:active,
+#ultra-card .plan-action--secondary:disabled {
   background: var(--canvas);
   color: var(--body);
 }
-#ultra-card .plan-action--secondary:hover {
+#ultra-card .plan-action--secondary:not(:disabled):hover {
   background: #fafafa;
   color: var(--ink);
 }
-#ultra-card .plan-action--secondary:active {
+#ultra-card .plan-action--secondary:not(:disabled):active {
   background: var(--divider);
   color: var(--ink);
+}
+#ultra-card .plan-action--secondary:disabled {
+  cursor: default;
+}
+
+/* Minimal deterministic mock-error feedback; no new chromatic error token is introduced. */
+.plan-feedback {
+  margin: 8px 0 0;
+  color: var(--body);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
 }
 
 /* Credit capacity bars share one scale: Free 1k / Pro 20k / Ultra 60k. */
