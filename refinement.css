@@ -77,3 +77,9 @@
   width: 1.667%;
   min-width: 8px;
 }
+
+/* Keep programmatic focus on the modal title for accessibility, but do not show a visual focus ring on the non-interactive heading. */
+.modal h2:focus,
+.modal h2:focus-visible {
+  outline: none;
+}
