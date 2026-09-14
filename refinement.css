@@ -27,9 +27,28 @@
 }
 .recommended[hidden] { display: none !important; }
 
-/* Recommendation outline is reserved for the approved initial Pro recommendation. */
-.plan-card.is-recommended { border-color: var(--action); }
+/* Recommendation treatment is exclusive to the approved initial Pro state. */
+.plan-card--pro.is-recommended { border-color: var(--action); }
 .plan-card--pro:not(.is-recommended) { border-color: transparent; }
+
+/* Ultra remains the default neutral card and secondary action in every Pro-completed state. */
+#ultra-card {
+  border-color: transparent;
+}
+#ultra-card .plan-action--secondary,
+#ultra-card .plan-action--secondary:hover,
+#ultra-card .plan-action--secondary:active {
+  background: var(--canvas);
+  color: var(--body);
+}
+#ultra-card .plan-action--secondary:hover {
+  background: #fafafa;
+  color: var(--ink);
+}
+#ultra-card .plan-action--secondary:active {
+  background: var(--divider);
+  color: var(--ink);
+}
 
 /* Credit capacity bars share one scale: Free 1k / Pro 20k / Ultra 60k. */
 .credit-progress-fill--free {
