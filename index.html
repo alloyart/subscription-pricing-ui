@@ -6,6 +6,7 @@
   <title>Plans & pricing</title>
   <meta name="description" content="Subscription plan comparison" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="refinement.css" />
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -108,7 +109,9 @@
                 <svg class="credit-summary-icon" aria-hidden="true"><use href="#icon-credits"/></svg>
                 <span>1,000 credits every month</span>
               </div>
-              <div class="credit-summary-rule" aria-hidden="true"></div>
+              <div class="credit-progress" aria-hidden="true">
+                <span class="credit-progress-fill credit-progress-fill--free"></span>
+              </div>
             </div>
 
             <div class="benefit-block">
@@ -121,10 +124,10 @@
             </div>
           </article>
 
-          <article class="plan-card plan-card--pro" id="pro-card" aria-labelledby="pro-title">
+          <article class="plan-card plan-card--pro is-recommended" id="pro-card" aria-labelledby="pro-title">
             <div class="plan-topline">
               <h2 id="pro-title" tabindex="-1">Pro</h2>
-              <span class="recommended">Recommended</span>
+              <span class="recommended" id="pro-recommended">Recommended</span>
             </div>
             <div class="price-row" aria-label="$12 per month">
               <span class="price-value">$12</span>
@@ -158,6 +161,7 @@
           <article class="plan-card" id="ultra-card" aria-labelledby="ultra-title">
             <div class="plan-topline">
               <h2 id="ultra-title">Ultra</h2>
+              <span class="recommended" id="ultra-recommended" hidden>Recommended</span>
             </div>
             <div class="price-row" aria-label="$30 per month">
               <span class="price-value">$30</span>
